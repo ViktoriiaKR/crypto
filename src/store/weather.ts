@@ -31,15 +31,10 @@ class Store {
         runInAction(() => {
           this.weatherData = empty
           this.loading = true
-          this.weatherError = false
         })
+        
       }
     } catch (error) {
-      if (error.response.data.cod === '404') {
-        runInAction(() => {
-          this.weatherError = true
-        })
-      }
       console.log(error, 'error')
     }
     finally {

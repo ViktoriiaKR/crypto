@@ -11,8 +11,8 @@ const WeatherPage: React.FC = observer(() => {
   
   useEffect(() => {
   console.log(weatherStore.loading, 'weatherStore.loading')
-  console.log(weatherStore.weatherData, '8')
-  }, [weatherStore.weatherData])
+
+  }, [weatherStore.loading])
 
   return (
     <div className={styles.weather_page}>
