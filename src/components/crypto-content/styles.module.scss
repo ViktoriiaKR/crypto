@@ -1,0 +1,45 @@
+.crypto_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 142px;
+    width: 100%;
+    h1 {
+        padding: 48px 61px 0px;
+        color: #101843;
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 33px;
+        line-height: 49px;
+        margin-bottom: 35px;
+        &::after {
+            content: url(./../../sources/image/Polygon.svg);
+            margin-left: 14px;
+            position: relative;
+            top: -15%;
+        }
+    }
+    .gradient {
+        background: linear-gradient(269.99deg, rgba(255, 255, 255, 0.3) 29.5%, rgba(0, 0, 0, 0) 299.18%);
+        max-width: 751px;
+        width: 100%;
+        padding-left: 61px;
+        padding-right: 120px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        table {
+            width: 100%;
+            tr {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    }
+    .chart {
+        height: 270px;
+        margin: 0px 40px 0px 61px;
+        background-color: bisque;
+    }
+}

@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import './App.css';
 import store from '../../store';
-import SearchPage from './../search-page'
+import SearchPage from '../crypro-page'
 
 function App() {
   return (

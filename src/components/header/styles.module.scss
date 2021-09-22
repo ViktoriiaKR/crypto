@@ -1,0 +1,100 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    height: 142px;
+    background: #172060;
+    .logo {
+        padding: 39px;
+    }
+    .nav_menu {
+        max-width: 568px;
+        width: 100%;
+        ul {
+            font-family: Poppins;
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+            li {
+                a {
+                    color: #BAB9B9;
+                    font-weight: 500;
+                    font-size: 19.5px;
+                    line-height: 29px;
+                    &:hover {
+                        color: #FFFFFF;
+                    }
+                }
+                &:last-child {
+                    &::after {
+                        content: 'SOON';
+                        padding: 0px 8px;
+                        background: #FFFFFF;
+                        color: #182266;
+                        border-radius: 8.5px;
+                        font-weight: 500;
+                        font-size: 8.5px;
+                        position: absolute;
+                        margin-left: 4px;
+                    }
+                }
+            }
+        }
+    }
+    .user_info {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        .user_initials {
+            margin-right: 22px;
+            font-family: Poppins;
+            h3 {
+                font-size: 19.5px;
+                font-weight: 500;
+                color: #FFFFFF;
+                display: flex;
+                line-height: 29px;
+                margin: 0;
+                &::before {
+                    content: url(./../../sources/image/Vector.svg);
+                    margin-right: 14.5px;
+                }
+            }
+            p {
+                font-family: Poppins;
+                font-size: 13px;
+                line-height: 19px;
+                color: #BEB6B6;
+                text-align: right;
+            }
+        }
+        .avatar {
+            position: relative;
+            height: 100%;
+            img {
+                height: 115px;
+                width: 82px;
+            }
+            .status {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 28px;
+                width: 28px;
+                border-radius: 50%;
+                background: #172060;
+                position: absolute;
+                left: -14px;
+                bottom: 14px;
+            
+                &::after {
+                    content: url(./../../sources/image/Ellipse1.svg);
+                }
+            }
+        }
+    }
+}

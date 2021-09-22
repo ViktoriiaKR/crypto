@@ -1,12 +1,12 @@
 import { createContext, useContext } from 'react'
 import { configure, makeObservable, observable } from 'mobx'
 
-import weatherStore from './weather'
+import cryptoStore from './crypto'
 
 configure({ enforceActions: 'observed' })
 
 class RootStore {
-  @observable weatherStore = weatherStore
+  @observable cryptoStore = cryptoStore
 
   constructor() {
     makeObservable(this)

@@ -1,0 +1,32 @@
+.crypto_side_bar {
+    min-width: 320px;
+    background: #172060;
+    margin-top: 142px;
+    h2 {
+        color: #FFFFFF;
+        font-family: Poppins;
+        font-weight: 500;
+        font-size: 19.5px;
+        line-height: 29px;
+        margin-top: 20px;
+        padding: 0px 40px;
+    }
+    ul {
+        list-style-type: none;
+        padding-left: 40px;
+        overflow-y: auto;
+        height: -webkit-fill-available;
+        margin-bottom: 60px;
+        div {
+            p {
+                margin: 0;
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18.5px;
+                line-height: 28px;
+                color: #ffff;
+            }
+        }
+    }
+}
