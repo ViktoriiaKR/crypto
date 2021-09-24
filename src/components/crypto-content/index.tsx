@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { observer } from 'mobx-react';
 import styles from './styles.module.scss'
+import Dashboard from '../dashboard';
+import { useStore } from '../../store';
 
 const CryptoContent: React.FC = observer(() => {
+  const { cryptoStore } = useStore()
 
+  useEffect(() => {
+
+  }, [cryptoStore.dataCurrencyID])
 
   return (
         <div className={styles.crypto_content}>
@@ -27,7 +33,8 @@ const CryptoContent: React.FC = observer(() => {
             </table>
           </div>
           <div className={styles.chart}>
-            chart
+            {<Dashboard data={cryptoStore.dataCurrencyID} />}
+            
           </div>
           <div className={styles.gradient}>
 
