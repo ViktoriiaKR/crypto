@@ -1,16 +1,7 @@
-// @ts-nocheck
-
 import { observable, action, makeObservable, runInAction } from 'mobx'
-import { api } from '../utils/config'
-import {formatData} from './../utils/formatData'
-import {formatOneCurrency} from './../utils/formatOneCurrency'
-
-// const URL = "https://api.openweathermap.org/data/2.5/forecast?q="
-// const API_KEY = 'bad46dfee1ae1125ec4faf31e63449de'
-
-
-// https://api.pro.coinbase.com/products/${id}/candles?granularity=86400
-
+import { api } from 'utils/config'
+import {formatOneCurrency} from 'utils/formatOneCurrency'
+import {formatCandlestick} from 'utils/formatForCandlestick'
 class Store {
   constructor() {
     makeObservable(this)
@@ -21,6 +12,7 @@ class Store {
   @observable pastData: any = {}
   @observable dataCurrencyID: any = []
   @observable currencies: any = []
+  @observable TEST: any = {}
 
   @action
     async getAllCrypto() {
@@ -30,13 +22,13 @@ class Store {
    
       if (data) {
   
-        let filtered = data.filter((pair) => {
+        let filtered = data.filter((pair: any) => {
           if (pair.quote_currency === "USD") {
             return pair;
           }
         });
 
-        filtered = filtered.sort((a, b) => {
+        filtered = filtered.sort((a: any, b: any) => {
           if (a.base_currency < b.base_currency) {
             return -1;
           }
@@ -46,31 +38,11 @@ class Store {
           return 0;
         });
        
-        const currencyID = filtered.map(a => a.id)
+        const currencyID = filtered.map((a: any) => a.id)
         runInAction(() => {
           this.currencies = currencyID
         })
 
-        // const empty = []
-
-        // for (let i = 0; i < currencyID.length; i++) {
-        //   const response = await api.get(`https://api.pro.coinbase.com/products/${ADA-USD}/candles?granularity=86400`)
-        //   empty.push(response.data) 
-        //   // if (i + 1 === currencyID.length) {
-        //   //   let formattedData = formatData(empty)
-        //   //   // console.log(formattedData)
-        //   // }
-        // }
-
-        // let compare = currencyID.reduce((o,c,i) => {o[c] = o[c] ? o[c] + ", " + empty[i]:empty[i]; return o;}, {})
-    
-        // let formattedData = formatData(compare)
-     
-        // runInAction(() => {
-        //   this.pastData = formattedData
-        //   this.cryptoData = filtered
-        //   this.compareData = compare[0]
-        // })
         this.cryptoData ? this.loading = true : this.loading = false
       }
     } catch (error) {
@@ -85,9 +57,13 @@ class Store {
    console.log(data, 'data')
       if (data) {
         const result = formatOneCurrency(data)
-        
+        const res = formatCandlestick(data)
+
+       console.log(res, 'resssss')
+       
         runInAction(() => {
           this.dataCurrencyID = result
+          this.TEST = res
         })
       }
     } catch (error) {

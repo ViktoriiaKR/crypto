@@ -28,6 +28,41 @@
   color: #61dafb;
 }
 
+.ant-menu {
+  border: 0;
+}
+
+.ant-menu-item {
+  height: 101px !important;
+  color: #FFFFFF;
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 18.5px;
+  line-height: 28px;
+}
+
+.ant-menu-item::after {
+  border-right: 0px !important;
+}
+
+.ant-menu-item:hover {
+  background: #FFFFFF !important;
+  color: #141D53 !important;
+}
+
+.ant-menu-item-selected {
+  background: #FFFFFF !important;
+  color: #141D53 !important;
+}
+
+.ant-layout-sider {
+  width: 100% !important;
+  min-width: 100% !important;
+  background: transparent !important;
+  height: calc(100% - 100px);
+  overflow-y: auto;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +71,4 @@
     transform: rotate(360deg);
   }
 }
+
