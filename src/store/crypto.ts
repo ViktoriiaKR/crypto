@@ -1,18 +1,18 @@
 import { observable, action, makeObservable, runInAction } from 'mobx'
 import { api } from 'utils/config'
-import {formatOneCurrency} from 'utils/formatOneCurrency'
 import {formatCandlestick} from 'utils/formatForCandlestick'
+import _ from 'lodash'
 class Store {
   constructor() {
     makeObservable(this)
   }
   @observable cryptoData: any = []
-  @observable compareData: any = []
   @observable loading: any = false
-  @observable pastData: any = {}
-  @observable dataCurrencyID: any = []
   @observable currencies: any = []
-  @observable TEST: any = {}
+  @observable candlelist: any = {}
+  @observable currencyName: string = ''
+  @observable areaChartsList: any = {}
+  @observable switchingCharts: boolean = true
 
   @action
     async getAllCrypto() {
@@ -54,21 +54,41 @@ class Store {
     async getCryptoByID(id: string) {
     try {
       const { data } = await api.get(`https://api.pro.coinbase.com/products/${id}/candles?granularity=86400`)
-   console.log(data, 'data')
       if (data) {
-        const result = formatOneCurrency(data)
         const res = formatCandlestick(data)
-
-       console.log(res, 'resssss')
        
         runInAction(() => {
-          this.dataCurrencyID = result
-          this.TEST = res
+          this.currencyName = id
+          this.candlelist = res
+          this.switchingCharts = true
         })
       }
     } catch (error) {
       console.log(error, 'error')
     }
+  }
+
+  @action
+  async getCryptoByPeriod(period: number) {
+    let newObj = _.cloneDeep(this.candlelist)
+    let lengthValues = this.candlelist.series[0].data.length
+    if (lengthValues >= period) {
+      const res = newObj.series[0].data.slice(-period)
+      newObj.series[0].data = res
+    } else {
+      alert(`По данной валюте доступно всего - ${lengthValues} точек (максимальное количество), выберите меньший интервал`)
+    }
+    runInAction(() => {
+      this.areaChartsList = newObj
+      this.switchingCharts = false
+    })
+  }
+
+  @action
+  async clear() {
+    runInAction(() => {
+      this.switchingCharts = false
+    })
   }
 }
 export default new Store()

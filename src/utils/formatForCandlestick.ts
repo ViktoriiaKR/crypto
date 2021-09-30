@@ -4,12 +4,7 @@ export const formatCandlestick= (data: any) => {
     let result = {
       series: [{
         name: 'candle',
-        data: [
-        //   {
-        //     x: new Date(1624147200),
-        //     y: [6629.81, 6650.5, 6623.04, 6633.33]
-        //   },
-        ]
+        data: []
       }],
       options: {
         chart: {
@@ -58,18 +53,30 @@ export const formatCandlestick= (data: any) => {
       },
     };
 
-    
-  
-    let dates = data.map((val: any) => {
+    let arrDate = [] as any
+    let arrPrice = [] as any
+
+      data.map((val: any) => {
         let date = new Date(val[0] * 1000);
-        let resDate = result.series[0].data.push({
-        //  @ts-ignore
-            x: date,
-        //  @ts-ignore
-            y: [val[1], val[2], val[3], val[4]],
+        arrDate.push(date)
+        arrPrice.push([val[1], val[2], val[3], val[4]])
+      })
+      arrPrice.reverse() 
+      arrDate.reverse()
+    
+      arrDate.forEach((el: any) => {
+        result.series[0].data.push({
+          // @ts-ignore
+          x: el
         })
-        return resDate;
       });
+
+      for (let i = 0; i < arrPrice.length; i++) {
+        for (let i = 0; i < result.series[0].data.length; i++) {
+          // @ts-ignore
+          result.series[0].data[i].y = arrPrice[i]
+        }
+      };
     return result;
   };
   

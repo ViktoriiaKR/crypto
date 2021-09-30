@@ -5,9 +5,9 @@ import {
   Switch,
   Route
 } from 'react-router-dom'
-import './App.css';
-import store from '../../store';
-import SearchPage from '../crypro-page'
+import './App.scss';
+import store from 'store';
+import SearchPage from '../CryptoPage'
 
 function App() {
   return (
