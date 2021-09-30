@@ -2,7 +2,6 @@
     min-width: 320px;
     background: #172060;
     margin-top: 142px;
-    padding: 0px 16px;
     h2 {
         color: #FFFFFF;
         font-family: Poppins;
@@ -10,14 +9,14 @@
         font-size: 19.5px;
         line-height: 29px;
         margin-top: 20px;
-        padding: 0px 40px;
+        padding: 0px 0px 0px 24px;
     }
     ul {
         list-style-type: none;
-        padding-left: 40px;
-        overflow-y: auto;
+        background: transparent;
         height: -webkit-fill-available;
-        margin-bottom: 60px;
+        overflow-x: hidden;
+        border: 0;
         div {
             p {
                 margin: 0;

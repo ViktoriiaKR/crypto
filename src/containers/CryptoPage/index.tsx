@@ -1,18 +1,20 @@
 import React, { useEffect } from 'react'
-import styles from './styles.module.scss'
 import { observer } from 'mobx-react';
-import Header from '../../components/header';
-import CryptoSideBar from '../../components/crypto-side-bar';
-import CryptoContent from '../../components/crypto-content';
-import { useStore } from '../../store';
+// components
+import Header from 'components/header';
+import CryptoSideBar from 'components/cryptoSideBar';
+import CryptoContent from 'components/cryptoContent';
+// store
+import { useStore } from 'store';
 import { Spin } from 'antd';
+// styles
+import styles from './styles.module.scss'
 
 const WeatherPage: React.FC = observer(() => {
   const { cryptoStore } = useStore()
   
   useEffect(() => {
     cryptoStore.getAllCrypto()
-
   }, [cryptoStore])
 
   return (

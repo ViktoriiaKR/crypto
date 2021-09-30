@@ -1,26 +1,18 @@
-// @ts-nocheck
-
 import { observable, action, makeObservable, runInAction } from 'mobx'
-import { api } from '../utils/config'
-import {formatData} from './../utils/formatData'
-import {formatOneCurrency} from './../utils/formatOneCurrency'
-
-// const URL = "https://api.openweathermap.org/data/2.5/forecast?q="
-// const API_KEY = 'bad46dfee1ae1125ec4faf31e63449de'
-
-
-// https://api.pro.coinbase.com/products/${id}/candles?granularity=86400
-
+import { api } from 'utils/config'
+import {formatCandlestick} from 'utils/formatForCandlestick'
+import _ from 'lodash'
 class Store {
   constructor() {
     makeObservable(this)
   }
   @observable cryptoData: any = []
-  @observable compareData: any = []
   @observable loading: any = false
-  @observable pastData: any = {}
-  @observable dataCurrencyID: any = []
   @observable currencies: any = []
+  @observable candlelist: any = {}
+  @observable currencyName: string = ''
+  @observable areaChartsList: any = {}
+  @observable switchingCharts: boolean = true
 
   @action
     async getAllCrypto() {
@@ -30,13 +22,13 @@ class Store {
    
       if (data) {
   
-        let filtered = data.filter((pair) => {
+        let filtered = data.filter((pair: any) => {
           if (pair.quote_currency === "USD") {
             return pair;
           }
         });
 
-        filtered = filtered.sort((a, b) => {
+        filtered = filtered.sort((a: any, b: any) => {
           if (a.base_currency < b.base_currency) {
             return -1;
           }
@@ -46,31 +38,11 @@ class Store {
           return 0;
         });
        
-        const currencyID = filtered.map(a => a.id)
+        const currencyID = filtered.map((a: any) => a.id)
         runInAction(() => {
           this.currencies = currencyID
         })
 
-        // const empty = []
-
-        // for (let i = 0; i < currencyID.length; i++) {
-        //   const response = await api.get(`https://api.pro.coinbase.com/products/${ADA-USD}/candles?granularity=86400`)
-        //   empty.push(response.data) 
-        //   // if (i + 1 === currencyID.length) {
-        //   //   let formattedData = formatData(empty)
-        //   //   // console.log(formattedData)
-        //   // }
-        // }
-
-        // let compare = currencyID.reduce((o,c,i) => {o[c] = o[c] ? o[c] + ", " + empty[i]:empty[i]; return o;}, {})
-    
-        // let formattedData = formatData(compare)
-     
-        // runInAction(() => {
-        //   this.pastData = formattedData
-        //   this.cryptoData = filtered
-        //   this.compareData = compare[0]
-        // })
         this.cryptoData ? this.loading = true : this.loading = false
       }
     } catch (error) {
@@ -82,17 +54,41 @@ class Store {
     async getCryptoByID(id: string) {
     try {
       const { data } = await api.get(`https://api.pro.coinbase.com/products/${id}/candles?granularity=86400`)
-   console.log(data, 'data')
       if (data) {
-        const result = formatOneCurrency(data)
-        
+        const res = formatCandlestick(data)
+       
         runInAction(() => {
-          this.dataCurrencyID = result
+          this.currencyName = id
+          this.candlelist = res
+          this.switchingCharts = true
         })
       }
     } catch (error) {
       console.log(error, 'error')
     }
+  }
+
+  @action
+  async getCryptoByPeriod(period: number) {
+    let newObj = _.cloneDeep(this.candlelist)
+    let lengthValues = this.candlelist.series[0].data.length
+    if (lengthValues >= period) {
+      const res = newObj.series[0].data.slice(-period)
+      newObj.series[0].data = res
+    } else {
+      alert(`По данной валюте доступно всего - ${lengthValues} точек (максимальное количество), выберите меньший интервал`)
+    }
+    runInAction(() => {
+      this.areaChartsList = newObj
+      this.switchingCharts = false
+    })
+  }
+
+  @action
+  async clear() {
+    runInAction(() => {
+      this.switchingCharts = false
+    })
   }
 }
 export default new Store()
