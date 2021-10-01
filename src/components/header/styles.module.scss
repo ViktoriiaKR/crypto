@@ -75,6 +75,17 @@ header {
         .avatar {
             position: relative;
             height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            button {
+                background: #FFFFFF;
+                color: #141D53;
+                border-radius: 10px;
+                border: 0;
+                font-weight: 600;
+                width: 100%;
+            }
             img {
                 height: 115px;
                 width: 82px;
@@ -91,9 +102,9 @@ header {
                 left: -14px;
                 bottom: 14px;
             
-                &::after {
-                    content: url(./../../sources/image/Ellipse1.svg);
-                }
+                // &::after {
+                //     content: url(./../../sources/image/Ellipse1.svg);
+                // }
             }
         }
     }
