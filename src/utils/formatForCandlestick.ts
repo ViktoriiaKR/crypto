@@ -70,7 +70,7 @@ export const formatCandlestick= (data: any) => {
           x: el
         })
       });
-console.log(arrPrice, 'arrPrice')
+
       for (let i = 0; i < arrPrice.length; i++) {
         for (let i = 0; i < result.series[0].data.length; i++) {
           // @ts-ignore
