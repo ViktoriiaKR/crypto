@@ -59,7 +59,7 @@ export const formatCandlestick= (data: any) => {
       data.map((val: any) => {
         let date = new Date(val[0] * 1000);
         arrDate.push(date)
-        arrPrice.push([val[1], val[2], val[3], val[4]])
+        arrPrice.push([val[3], val[1], val[2], val[4]])
       })
       arrPrice.reverse() 
       arrDate.reverse()
@@ -70,7 +70,7 @@ export const formatCandlestick= (data: any) => {
           x: el
         })
       });
-
+console.log(arrPrice, 'arrPrice')
       for (let i = 0; i < arrPrice.length; i++) {
         for (let i = 0; i < result.series[0].data.length; i++) {
           // @ts-ignore
