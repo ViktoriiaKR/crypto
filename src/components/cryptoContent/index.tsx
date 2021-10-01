@@ -33,10 +33,12 @@ const CryptoContent: React.FC = observer(() => {
                   <DropDown />
                  </div>
               }
-              <div className={styles.chart}>
-                {cryptoStore.switchingCharts && cryptoStore.candlelist.series !== undefined && <ReactApexChart options={cryptoStore.candlelist.options} series={cryptoStore.candlelist.series} type="candlestick" height={350} />}
-                {!cryptoStore.switchingCharts && cryptoStore.areaChartsList.series !== undefined && <ReactApexChart options={cryptoStore.areaChartsList.options} series={cryptoStore.areaChartsList.series} type="area" height={350} />}
-              </div>
+              <div>
+                <div className={styles.chart}>
+                  {cryptoStore.switchingCharts && cryptoStore.candlelist.series !== undefined && <ReactApexChart options={cryptoStore.candlelist.options} series={cryptoStore.candlelist.series} type="candlestick" height={350} />}
+                  {!cryptoStore.switchingCharts && cryptoStore.areaChartsList.series !== undefined && <ReactApexChart options={cryptoStore.areaChartsList.options} series={cryptoStore.areaChartsList.series} type="area" height={350} />}
+                </div>
+                </div>
             </>
           }
         </div>
