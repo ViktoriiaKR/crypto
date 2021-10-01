@@ -1,22 +1,17 @@
 import React, { Suspense } from 'react';
 import { Provider } from 'mobx-react'
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from 'react-router-dom'
+  BrowserRouter as Router} from 'react-router-dom'
 import './App.scss';
 import store from 'store';
-import SearchPage from '../CryptoPage'
+import AppRouter from 'utils/RouteSettings';
 
 function App() {
   return (
     <Suspense fallback={null}>
       <Provider {...store}>
           <Router>
-            <Switch>
-              <Route component={SearchPage} path="/" />
-            </Switch>
+            <AppRouter />
           </Router>
       </Provider>
     </Suspense>
