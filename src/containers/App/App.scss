@@ -76,4 +76,7 @@ App-header {
       border-right: 0px !important;
     }
   }
+  .ant-menu:not {
+    background-color: transparent;
+  }
 }
