@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { observer } from 'mobx-react'
 import { Layout, Menu } from 'antd';
+import cn from 'classnames'
 // store
 import { useStore } from 'store';
 // styles
@@ -30,10 +31,12 @@ const Period = [
 
 const DropDown: React.FC = observer(() => {
   const { cryptoStore } = useStore()
+  const DataLength = cryptoStore.candlelist.series[0].data.length
   
-  const handleChange = (value: number) => {
+  const handleChange = (e: any, value: number) => {
     cryptoStore.clear()
     cryptoStore.getCryptoByPeriod(value)
+    
   }
 
   return (
@@ -42,7 +45,12 @@ const DropDown: React.FC = observer(() => {
              <Sider width={300} style={{ margin: '0 !important' }} >
                 <Menu mode="inline">
                     {Period.map(period => (
-                        <Item key={period.key} onClick={() => handleChange(period.key)}>
+                        <Item className={cn({
+                            [styles.off]: cryptoStore.switchingCharts,
+                          })}
+                           key={period.key} onClick={(e) => handleChange(e, period.key)}
+                           disabled={DataLength >= period.key ? false : true}
+                        >
                             <span>{period.value}</span>
                         </Item>
                     ))}
