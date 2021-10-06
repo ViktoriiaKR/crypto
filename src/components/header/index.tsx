@@ -19,10 +19,10 @@ const Header: React.FC = observer(() => {
       </div>
       <nav className={styles.nav_menu}>
           <ul>
-            <li><a href="#">Exchange</a></li>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Balances</a></li>
-            <li><a href="#">Wallet</a></li>
+            <li><a href="/">Exchange</a></li>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/">Balances</a></li>
+            <li><a href="/">Wallet</a></li>
           </ul>
       </nav>
       <div className={styles.user_info}>

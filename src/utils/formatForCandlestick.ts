@@ -1,10 +1,15 @@
 import dayjs from "dayjs";
 
-export const formatCandlestick= (data: any) => {
+interface IData {
+  x: Date,
+  y: Array<number>
+}
+
+export const formatCandlestick= (data: (number)[] | null) => {
     let result = {
       series: [{
         name: 'candle',
-        data: []
+        data: [] as any
       }],
       options: {
         chart: {
@@ -12,7 +17,6 @@ export const formatCandlestick= (data: any) => {
           type: 'candlestick',
         },
         title: {
-        //   text: 'CandleStick Chart - Category X-axis',
           align: 'left'
         },
         annotations: {
@@ -40,7 +44,7 @@ export const formatCandlestick= (data: any) => {
         xaxis: {
           type: 'category',
           labels: {
-            formatter: function(val: any) {
+            formatter: function(val: Date) {
               return dayjs(val).format('MMM DD HH:mm')
             }
           }
@@ -56,7 +60,8 @@ export const formatCandlestick= (data: any) => {
     let arrDate = [] as any
     let arrPrice = [] as any
 
-      data.map((val: any) => {
+      data!.map((val: any) => {
+
         let date = new Date(val[0] * 1000);
         arrDate.push(date)
         arrPrice.push([val[3], val[1], val[2], val[4]])
@@ -64,16 +69,14 @@ export const formatCandlestick= (data: any) => {
       arrPrice.reverse() 
       arrDate.reverse()
     
-      arrDate.forEach((el: any) => {
+      arrDate.forEach((el: Date) => {
         result.series[0].data.push({
-          // @ts-ignore
           x: el
         })
       });
 
       for (let i = 0; i < arrPrice.length; i++) {
         for (let i = 0; i < result.series[0].data.length; i++) {
-          // @ts-ignore
           result.series[0].data[i].y = arrPrice[i]
         }
       };

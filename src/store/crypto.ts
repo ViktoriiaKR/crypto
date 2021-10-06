@@ -56,7 +56,7 @@ class Store {
       const { data } = await api.get(`https://api.pro.coinbase.com/products/${id}/candles?granularity=86400`)
       if (data) {
         const res = formatCandlestick(data)
-       
+       console.log(res,'kkkkkkkkkkkkk')
         runInAction(() => {
           this.currencyName = id
           this.candlelist = res
